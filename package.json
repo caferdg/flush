@@ -1,0 +1,15 @@
+{
+  "name": "flush",
+  "version": "1.0.0",
+  "description": "Basic CLI made for a class in INSA Lyon",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cafer DINGIL",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^8.2.5"
+  }
+}
