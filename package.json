@@ -7,9 +7,6 @@
     "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Cafer DINGIL",
-  "license": "ISC",
-  "dependencies": {
-    "inquirer": "^8.2.5"
-  }
+  "author": "Cafer",
+  "license": "ISC"
 }
