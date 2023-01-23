@@ -20,6 +20,12 @@ async function main() {
 
             rl.on('line', function(command) {
                 args = command.trim().split(" ");
+                if (args[args.length -1] == "!") {
+                    f.setBg(true);
+                }
+                else {
+                    f.setBg(false);
+                }
                 switch(args[0]) {
                     case "":
                         rl.prompt();
@@ -29,6 +35,9 @@ async function main() {
                         break;
                     case "bing":
                         f.bing(args);
+                        break;
+                    case "keep":
+                        f.keep(args);
                         break;
                     default:
                         f.execute(args);

@@ -1,17 +1,29 @@
 // features.js
 const childProcess = require('child_process');
 
+let background = false;
+
+setBg = (newStat) => {
+    background = newStat;
+}
 
 execute = function(args) {
     program = args.shift();
-	cp = childProcess.spawn(program, args, {shell: true});
-    cp.stdout.on('data', (data) => {
-        console.log(`${data}`);
-      });
-    
-    cp.stderr.on('data', (data) => {
-        console.error(`${data}`);
-    });
+    if (background) {
+        args[args.length-1] = "&";
+        bgCp = childProcess.spawn(program, args.slice(0,args.length), { shell: true});
+        console.log("Process " + bgCp.pid + " runs in background");
+    }
+    else{
+        cp = childProcess.spawn(program, args, {shell: true});
+        cp.stdout.on('data', (data) => {
+            console.log(`${data}`);
+            });
+        
+        cp.stderr.on('data', (data) => {
+            console.error(`${data}`);
+        });
+    }
     return
 }
 
@@ -28,6 +40,10 @@ listProcess = function() {
 }
 
 bing = function(command) {
+    if (command.length != 3) {
+        console.log("Usage : bing [-k|-p|-c] pid");
+        return;
+    }
     args = []
     pid = command[2];
     switch(command[1]) {
@@ -41,7 +57,7 @@ bing = function(command) {
             signal = "-CONT";
             break;
         default:
-            console.log("Bad usage of bing, type 'help'")
+            console.log("Invalid argument")
             return;
     }
     args.push(signal);
@@ -74,4 +90,17 @@ bing = function(command) {
     return;
 }
 
-module.exports = { execute, listProcess, bing };
+keep = function(command) {
+    pid = command[1];
+    cp = childProcess.spawn("kill", ["-STOP", pid, "&"], {shell: true})
+    cpP = childProcess.spawn("kill", ["-CONT", pid, "&"], {shell: true})
+    cpP.on('close', (code) => {
+        if(code == 0) {
+            console.log("Process " + pid + " detached");
+        }
+      }
+    );
+}
+
+
+module.exports = { execute, listProcess, bing, setBg, keep};
