@@ -33,6 +33,9 @@ async function main() {
                     case "keep":
                         f.keep(args);
                         break;
+                    case "help":
+                        f.help();
+                        break;
                     default:
                         f.execute(args);
                         break;

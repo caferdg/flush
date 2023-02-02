@@ -86,6 +86,10 @@ bing = function(command) {
 }
 
 keep = function(command) {
+    if (command.length != 2) {
+        console.log("Usage : keep <processID>");
+        return;
+    }
     pid = command[1];
     cp = childProcess.spawn("kill", ["-STOP", pid, "&"], {shell: true})
     cpP = childProcess.spawn("kill", ["-CONT", pid, "&"], {shell: true})
@@ -97,5 +101,15 @@ keep = function(command) {
     );
 }
 
+help = function() {
+    console.log("flu.sh commands :");
+    console.log(" lp : list all processes");
+    console.log(" bing [-k|-p|-c] <processId> : kill, pause or continue a process");
+    console.log(" keep <processID> : detach a process");
+    console.log(" <program> <args> : execute a program");
+    console.log("Use ! suffix to run a program in background");
+    console.log("Use Ctrl+P to exit flu.sh");
+}
 
-module.exports = { execute, listProcess, bing, keep};
+
+module.exports = { execute, listProcess, bing, keep, help};
