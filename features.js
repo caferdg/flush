@@ -1,15 +1,10 @@
 // features.js
 const childProcess = require('child_process');
 
-let background = false;
-
-setBg = (newStat) => {
-    background = newStat;
-}
-
 execute = function(args) {
     program = args.shift();
-    if (background) {
+    isBg = args[args.length-1]=="!";
+    if (isBg) {
         args[args.length-1] = "&";
         bgCp = childProcess.spawn(program, args.slice(0,args.length), { shell: true});
         console.log("Process " + bgCp.pid + " runs in background");
@@ -103,4 +98,4 @@ keep = function(command) {
 }
 
 
-module.exports = { execute, listProcess, bing, setBg, keep};
+module.exports = { execute, listProcess, bing, keep};

@@ -1,12 +1,12 @@
 {
   "name": "flush",
   "version": "1.0.0",
-  "description": "Basic CLI made for a class in INSA Lyon",
+  "description": "Basic command-line interpreter made for a school project",
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Cafer",
+  "author": "Cafer, Aziz",
   "license": "ISC"
 }

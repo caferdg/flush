@@ -1,5 +1,5 @@
 const f = require("./features.js");
-var readline = require('readline'),
+const readline = require('readline'),
 
 rl = readline.createInterface(process.stdin, process.stdout);
 
@@ -16,16 +16,10 @@ rl.setPrompt('flu.sh > ');
 async function main() {
     while (true){
         rl.prompt();
-        let cmd = await new Promise((resolve) => {
+        await new Promise((resolve) => {
 
             rl.on('line', function(command) {
                 args = command.trim().split(" ");
-                if (args[args.length -1] == "!") {
-                    f.setBg(true);
-                }
-                else {
-                    f.setBg(false);
-                }
                 switch(args[0]) {
                     case "":
                         rl.prompt();
